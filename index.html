@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+
+    <!-- SEO Meta Tags -->
+    <title>CosmeMatch V3.0 | 40代からの「美容成分適合分析」エイジングケア診断</title>
+    <meta name="description"
+        content="【最短30秒】あなたの肌に本当に足りない成分は何？40代からのエイジングケアは「成分」で選ぶ時代へ。ライスパワー、ナイアシンアミド、トラネキサム酸。専門家があなたの肌に最適な一品を適合分析します。">
+    <meta name="keywords" content="エイジングケア,美容成分診断,40代 スキンケア,肌診断,オルビスユー,ファンケル,アトピスマイル,ライスパワー,トラネキサム酸">
+    <link rel="canonical" href="https://takuma-beauty.github.io/cosme-match/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://takuma-beauty.github.io/cosme-match/">
+    <meta property="og:title" content="CosmeMatch | 40代からの成分適合分析診断">
+    <meta property="og:description" content="あなたの肌を科学する。本当に必要な美容成分を導き出す、次世代の美容診断。">
+    <meta property="og:image" content="./images/cosme_quiz_intro_1772282165418.png">
+
+    <!-- JSON-LD (SEO強化) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CosmeMatch",
+      "url": "https://takuma-beauty.github.io/cosme-match/",
+      "description": "40代女性向けに特化した美容成分適合分析プログラム",
+      "applicationCategory": "BeautyApplication",
+      "operatingSystem": "iOS, Android, Windows, macOS",
+      "author": { "@type": "Organization", "name": "CosmeMatch Expert Analysis Team" }
+    }
+    </script>
+
+    <!-- Tailwind & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        'soft-gold': '#F9E4B7',
+                        beige: '#FAF9F8',
+                        'midnight-gold': '#1A1712',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans JP', 'sans-serif'],
+                        serif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+            body { @apply bg-beige text-[#333] font-sans antialiased break-words leading-relaxed; }
+            h1, h2, h3, h4 { @apply font-serif leading-tight; }
+        }
+        
+        .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F9E4B7 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.98); @apply rounded-[2.5rem] border border-[#E5E1DA] shadow-xl overflow-hidden mb-8; }
+        
+        .btn-select {
+            @apply w-full text-left p-4 mb-3 border border-[#D1CDC7] rounded-2xl bg-white font-bold transition-all duration-300 flex items-center justify-between text-sm md:text-base active:scale-95 shadow-sm hover:shadow-md;
+        }
+        .btn-select:hover { @apply border-gold bg-[#FDFBF7]; }
+        .btn-select::after { content: '→'; @apply text-gold font-black ml-2 opacity-30; }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* スマホ向け文字ズレ・サイズ最適化 */
+        .text-fluid-title { font-size: clamp(1.25rem, 5vw, 2.25rem); }
+        .text-fluid-body { font-size: clamp(0.8rem, 2.4vw, 0.95rem); }
+        
+        .image-aspect { aspect-ratio: 16 / 9; @apply w-full object-cover rounded-2xl mb-6 shadow-inner bg-gray-100; }
+
+        /* 文章の改行と美しさ */
+        .readable-text { @apply space-y-4 text-gray-600 px-1; }
+        .readable-text p { @apply leading-[1.8] tracking-wide; }
+    </style>
+</head>
+
+<body class="safe-area-pt pb-24">
+
+    <!-- Header -->
+    <header class="bg-white pt-10 pb-14 px-6 text-center border-b border-gray-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+        <div class="mb-3 inline-block transform hover:scale-105 transition-transform duration-700">
+            <h1 class="text-3xl md:text-5xl font-black tracking-[0.15em] text-[#1A1712]">CosmeMatch</h1>
+        </div>
+        <p class="text-[9px] font-bold text-gray-400 tracking-[0.3em] uppercase">Scientific Beauty Analysis</p>
+    </header>
+
+    <main class="max-w-xl mx-auto px-4 -mt-8 relative z-10">
+
+        <!-- Main Analysis Area -->
+        <div id="display-area" class="fade-in">
+            <!-- Initial Card -->
+            <article id="quiz-container" class="glass-card p-6 md:p-10">
+                <div id="step-content">
+                    <div class="text-center">
+                        <img src="./images/cosme_quiz_intro_1772282165418.png" alt="Beauty Science Intro"
+                            class="image-aspect">
+                        <span
+                            class="text-[10px] font-black text-gold tracking-widest uppercase block mb-3 text-center">Ingredient
+                            Analysis</span>
+                        <h2 class="text-fluid-title font-black mb-6 text-gray-900 serif leading-normal">
+                            ブランド名に惑わされない、<br>
+                            「成分」で選ぶ本気の診断
+                        </h2>
+                        <div
+                            class="text-fluid-body text-gray-500 mb-8 leading-loose text-left bg-gray-50/50 p-5 rounded-2xl italic border-l-2 border-gold font-medium">
+                            40代からのエイジングケアにおいて、<br>
+                            「なんとなく良さそう」は遠回りの原因です。<br><br>
+                            あなたの現状の肌悩みをサイエンスの視点で紐解き、<br>
+                            今すぐ取り入れるべき「必須成分」を特定。
+                            適合する製品を、中立な立場で厳選提案します。
+                        </div>
+                        <button onclick="showQuestion()"
+                            class="w-full bg-midnight-gold text-white font-bold py-4 rounded-full tracking-widest shadow-xl hover:bg-gold transition-all active:scale-95 text-sm uppercase">Start
+                            Analysis</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Result Area (Initially Hidden) -->
+        <article id="result-container" class="hidden glass-card p-6 md:p-10 fade-in border-t-[10px] border-gold">
+            <div class="text-center mb-8">
+                <img id="result-img" src="" alt="Expert Result" class="image-aspect">
+                <span
+                    class="text-[10px] font-black text-gold tracking-widest uppercase mb-2 block text-center">Compatibility
+                    Report</span>
+                <h2 class="text-fluid-title font-black text-gray-900" id="result-title"></h2>
+            </div>
+
+            <section id="result-advice" class="readable-text mb-12">
+                <!-- Advice injected here -->
+            </section>
+
+            <!-- Conversion Selection Area -->
+            <section class="bg-[#FBF9F6] p-5 md:p-8 rounded-[2.5rem] border border-[#E5E1DA] relative shadow-inner">
+                <div
+                    class="absolute -top-3 left-6 bg-gold text-white text-[9px] px-4 py-1 font-black tracking-widest rounded-full shadow-lg">
+                    BEST INGREDIENT MATCH
+                </div>
+                <h3
+                    class="font-bold text-gray-800 text-sm md:text-base mb-8 serif border-b border-gold/10 pb-4 leading-relaxed">
+                    分析結果に基づき、<br>あなたの肌を「再起動」する推奨プログラム
+                </h3>
+                <div id="affiliate-area" class="space-y-6">
+                    <!-- Dynamic Affiliate Content -->
+                </div>
+            </section>
+
+            <button onclick="location.reload()"
+                class="w-full mt-12 text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em] hover:text-gold transition-colors">
+                Reload Analysis
+            </button>
+        </article>
+
+        <!-- SEO/EEAT & Blog Section -->
+        <section class="mt-20 space-y-16 pb-24 px-1">
+            <div class="space-y-10">
+                <h3 class="text-xl md:text-2xl font-black text-gray-900 border-l-4 border-gold pl-4 serif">
+                    最新美容コラム & 診断Tips
+                </h3>
+                <div class="grid gap-8">
+                    <article class="group">
+                        <img src="./images/cosme_blog_banner_1772282311920.png" alt="Beauty Ingredient Blog"
+                            class="rounded-3xl shadow-lg w-full mb-6 transform group-hover:scale-[1.01] transition-transform duration-500">
+                        <div class="px-2">
+                            <span
+                                class="text-[9px] font-black text-gold bg-gold/5 px-3 py-1 rounded-full uppercase tracking-widest">Scientific
+                                Insight</span>
+                            <h4 class="font-bold text-gray-900 mt-4 mb-4 text-base md:text-xl">40代女性の肌老化を招く「成分不足」の正体とは？
+                            </h4>
+                            <p class="text-fluid-body text-gray-500 leading-relaxed mb-6">
+                                自ら潤う力（ライスパワー）の減衰、ハリを支える細胞（ナイアシンアミド）の不活性。エイジングケアのカギを握る「厚労省承認成分」の重要性を紐解きます。
+                            </p>
+                            <a href="#"
+                                class="inline-block border-b-2 border-gold pb-1 text-[11px] font-black text-midnight-gold tracking-widest hover:text-gold transition-colors underline-offset-4">READ
+                                SCIENTIFIC ARTICLE</a>
+                        </div>
+                    </article>
+
+                    <article
+                        class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 md:flex gap-6 items-center">
+                        <div class="flex-1">
+                            <span
+                                class="text-[8px] font-bold text-gray-400 uppercase tracking-widest mb-2 block font-sans">Ingredient
+                                Pedia</span>
+                            <h4 class="font-bold text-gray-900 mb-3 text-base md:text-lg">トラネキサム酸×ナイアシンアミド：究極のWアプローチ法
+                            </h4>
+                            <p class="text-fluid-body text-gray-500 leading-relaxed">
+                                美白とシワ改善。40代の二大悩みに同時に立ち向かうための成分の組み合わせ、そして推奨される製品の選び方を徹底解説。
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Detailed Explanation (SEO / Trust) -->
+            <div
+                class="space-y-8 bg-midnight-gold text-white p-8 md:p-14 rounded-[3.5rem] shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full -mr-16 -mt-16"></div>
+                <h3
+                    class="text-xl md:text-2xl font-bold mb-8 text-soft-gold border-b border-white/10 pb-6 uppercase tracking-widest">
+                    Expert Perspective</h3>
+                <div class="readable-text !text-gray-300 !text-sm md:!text-base leading-loose">
+                    <p>
+                        私たちのエイジングケアの哲学はシンプルです。「必要な成分を、必要な量だけ、正しく届けること」。
+                    </p>
+                    <p>
+                        40代以降の肌は、基礎体力が低下しているため、市販の安価な保湿だけでは不十分な場合がほとんどです。本診断では、皮膚科学に基づいた成分適合性を評価し、あなたの「未来の美しさ」を確実にするための最適な選択肢を提示します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center pb-12 border-t border-gray-100 pt-10">
+            <div
+                class="flex flex-wrap justify-center gap-x-4 gap-y-2 opacity-50 text-[10px] mb-8 font-bold grayscale text-center">
+                <span>#エイジングケア分析</span><span>#美容成分適合診断</span><span>#40代スキンケア</span><span>#ライスパワー</span>
+            </div>
+            <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">&copy; 2026 CosmeMatch V3.0
+                Scientific Team</p>
+        </footer>
+    </main>
+
+    <!-- Bottom PR Anchor (Mobile Sticky) -->
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-2xl border-t border-gray-100 px-6 py-4 flex justify-between items-center text-[8px] font-black text-gray-500 z-50">
+        <span class="tracking-widest uppercase">Privacy & Term</span>
+        <span class="tracking-widest text-gold font-black">ADVERTISER DISCLOSURE：広告掲載（PR）</span>
+    </div>
+
+    <script>
+        /**
+         * CosmeMatch V3.0 - Ingredient Compatibility Analysis
+         * Stable Version - Relative Paths & Icon Placeholders
+         */
+        const questions = [
+            {
+                title: "今、最も強く感じている<br>肌の「衰え」はどれ？",
+                image: "./images/cosme_ingredient_lab_1772283679653.png",
+                options: [
+                    { label: "顔全体のハリ不足・しぼみ感", value: "firmness", advice: "肌の基底細胞の活性が低下しています。エネルギーをチャージし、ハリを再構築する「ナイアシンアミド」や「G.D.アクティベーター」が急務です。" },
+                    { label: "何をやっても直らない「深刻な乾燥」", value: "dryness", advice: "バリア機能が崩壊し、水分保持能が失われています。セラミドを自ら育てる唯一の成分「ライスパワーNo.11」での根本治療が不可欠です。" },
+                    { label: "顔色が暗く見える・頑固なくすみ", value: "dullness", advice: "メラニンの滞留と血行不良が起きています。抗炎症と美白を同時に叶える「トラネキサム酸」を中心とした透明感ケアが必要です。" },
+                    { label: "毛穴の開き・肌表面のザラつき", value: "texture", advice: "肌サイクル（ターンオーバー）が乱れています。キメを整え、バリア機能を安定させる低刺激なビタミン誘導体や保護成分が適合します。" }
+                ]
+            },
+            {
+                title: "日常的に受けている<br>肌ダメージの主因は？",
+                image: "./images/cosme_skin_expert_advice_1772282192395.png",
+                options: [
+                    { label: "紫外線（外出が多い・1年中ケア不足）", value: "uv" },
+                    { label: "過度なストレス・不規則な睡眠", value: "stress" },
+                    { label: "エアコンによる極度の乾燥環境", value: "aircon" },
+                    { label: "間違った洗顔（こすりすぎ・洗浄力強すぎ）", value: "wash" }
+                ]
+            }
+        ];
+
+        // Multi-Product Affiliate Database (Scientific Focus)
+        // Note: Using high-quality locally generated placeholder for product images to ensure 100% stability.
+        const productProfiles = {
+            firmness: {
+                main: {
+                    name: "オルビスユー ドット (最高峰ハリケア)",
+                    brand: "ORBIS",
+                    desc: "「ナイアシンアミド」と独自成分が、40代の深いしぼみにアプローチ。パンとしたハリと透明感の『結果』を求める方へ。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "初回トライアル 980円"
+                },
+                sub: {
+                    name: "ファンケル エンリッチプラス",
+                    brand: "FANCL",
+                    desc: "シワ改善の有効成分を凝縮。1ヶ月集中で、ゆるぎない美しさを手に入れる実力派スキンケア。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "お試しセット：1,800円"
+                }
+            },
+            dryness: {
+                main: {
+                    name: "アトピスマイル フォルテ",
+                    brand: "ライスパワーショップ",
+                    desc: "「ライスパワーNo.11」が肌の水分保持能を改善。自ら潤う力を育て、カサついた日常に終止符を打ちます。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "まずは体験版から"
+                },
+                sub: {
+                    name: "ファンケル トイロ バイタライジング",
+                    brand: "FANCL",
+                    desc: "生活リズムの乱れによる乾燥に。肌バリアを再構築し、もっちりとした質感を取り戻す新発想スキンケア。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "初回限定価格あり"
+                }
+            },
+            dullness: {
+                main: {
+                    name: "アンプルール ラグジュアリーホワイト",
+                    brand: "株式会社ハイサイド",
+                    desc: "新安定型ハイドロキノン配合。シミやくすみを恐れず、一点の曇りもない透明感を目指すあなたへ。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "特別価格キャンペーン中"
+                },
+                sub: {
+                    name: "オルビスユー ドット (美白有効成分配合)",
+                    brand: "ORBIS",
+                    desc: "トラネキサム酸が美白とハリを同時に叶える。透明感の欠如に、成分で立ち向かう最高傑作。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "7日間セット 980円"
+                }
+            },
+            texture: {
+                main: {
+                    name: "ファンケル トイロ お試しセット",
+                    brand: "FANCL",
+                    desc: "毛穴の目立ちや、不安定な肌サイクルを救う。肌バリアを整え、手触りの良いしなやかな肌へ導きます。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "お試し 1,200円〜"
+                },
+                sub: {
+                    name: "ファンケル アクネケア 薬用セット",
+                    brand: "FANCL",
+                    desc: "繰り返す肌トラブル、毛穴詰まりに。殺菌剤を使わず、肌本来の力を引き出す安心の設計。",
+                    link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD",
+                    price: "1,600円〜"
+                }
+            }
+        };
+
+        let currentStep = 0;
+        let answers = [];
+
+        function showQuestion() {
+            const q = questions[currentStep];
+            let html = `
+                <div class="fade-in px-1 text-center">
+                    <img src="${q.image}" alt="Compatibility Analysis" class="image-aspect shadow-lg mx-auto">
+                    <div class="mt-8">
+                        <span class="text-[9px] font-black text-gold mb-3 tracking-[0.4em] uppercase block">Analysis Step 0${currentStep + 1}</span>
+                        <h3 class="text-fluid-title font-black mb-10 text-gray-900 serif leading-snug">${q.title}</h3>
+                        <div class="space-y-4 text-left">
+                            ${q.options.map((opt) => `
+                                <button class="btn-select" onclick='nextStep(${JSON.stringify(opt).replace(/'/g, "\\'").replace(/"/g, "&quot;")})'>
+                                    <span class="pr-4 leading-relaxed">${opt.label}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('step-content').innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextStep(opt) {
+            answers.push(opt);
+            currentStep++;
+            if (currentStep < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+
+            const [sign, damage] = answers;
+            const profile = productProfiles[sign.value];
+
+            // Render Title & Advice
+            document.getElementById('result-img').src = "./images/cosme_skin_expert_advice_1772282192395.png";
+            document.getElementById('result-title').innerHTML = `${sign.label}<br>×<br>${damage.label} 影響`;
+
+            document.getElementById('result-advice').innerHTML = `
+                <div class="bg-gold/5 p-6 rounded-3xl border border-gold/10 italic text-[13px] md:text-sm mb-10 leading-loose text-center">
+                    分析結果、あなたの肌が必要としているのは<br>
+                    <strong>「${sign.label}を防ぎ、バリアを再建する特化した成分」</strong>。<br>
+                    今の状態を放置すると、老化ダメージの蓄積は加速してしまいます。
+                </div>
+                <div class="space-y-10 px-1">
+                    <div class="readable-text">
+                        <p class="font-bold text-gray-900 text-base md:text-lg mb-3 serif">【1】最新分析アドバイス</p>
+                        <p class="text-gray-500 leading-loose">${sign.advice}</p>
+                    </div>
+                    <div class="readable-text">
+                        <p class="font-bold text-gray-900 text-base md:text-lg mb-3 serif">【2】あなたへの推奨適合成分</p>
+                        <p class="text-gray-500 leading-loose">${profile.main.desc}</p>
+                    </div>
+                </div>
+            `;
+
+            // Render Multi-Affiliates with robust design
+            const adHtml = `
+                <div class="space-y-10 mt-6">
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-md border border-gray-100 transform active:scale-98 transition-transform">
+                        <div class="flex items-center gap-5 mb-5">
+                            <div class="w-16 h-16 bg-gold/5 rounded-2xl flex-shrink-0 flex items-center justify-center shadow-inner">
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.641.32a2 2 0 01-1.789 0l-.641-.32a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-1.42 1.42a2 2 0 00-.547 1.022l-.477 2.387a6 6 0 00.517 3.86l.32.641a2 2 0 010 1.789l-.32.641a6 6 0 00-.517 3.86l.477 2.387a2 2 0 00.547 1.022l1.42 1.42a2 2 0 001.022.547l2.387.477a6 6 0 003.86-.517l.641-.32a2 2 0 011.789 0l.641.32a6 6 0 003.86.517l2.387-.477a2 2 0 001.022-.547l1.42-1.42a2 2 0 00.547-1.022l.477-2.387a6 6 0 00-.517-3.86l-.32-.641a2 2 0 010-1.789l.32-.641a6 6 0 00.517-3.86l-.477-2.387a2 2 0 00-.547-1.022l-1.42-1.42zM12 15v4m0 0v4m0-4h4m-4 0H8"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[8px] font-black text-gold uppercase tracking-widest mb-1">${profile.main.brand}</p>
+                                <p class="font-black text-gray-900 text-[14px] leading-tight mb-2">${profile.main.name}</p>
+                                <p class="text-[11px] text-rose-500 font-bold">${profile.main.price}</p>
+                            </div>
+                        </div>
+                        <a href="${profile.main.link}" target="_blank" rel="nofollow" 
+                           class="block w-full text-center bg-midnight-gold text-white text-[12px] py-4 rounded-2xl font-black tracking-widest 
+                                  hover:bg-gold transition-all shadow-xl active:scale-95">
+                            公式サイトで適合レポートを確認 →
+                        </a>
+                    </div>
+
+                    <div class="px-2 pt-2 border-t border-gold/5 text-center">
+                         <p class="text-[9px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-6">Secondary Best Match</p>
+                         <div class="flex items-center gap-5 bg-white/50 p-4 rounded-3xl border border-gray-50 text-left">
+                             <div class="w-12 h-12 bg-gray-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                             </div>
+                             <div class="flex-1">
+                                <p class="font-black text-gray-800 text-[12px] leading-snug mb-2">${profile.sub.name}</p>
+                                <a href="${profile.sub.link}" target="_blank" rel="nofollow" class="text-[10px] font-black text-gold border-b-2 border-gold/30 pb-0.5 inline-block">適合プログラム詳細 →</a>
+                             </div>
+                         </div>
+                    </div>
+
+                    <p class="text-[9px] text-gray-400 font-bold leading-relaxed text-center pt-4 opacity-80 italic">
+                        ※最新のキャンペーン情報は各ブランドの公式サイトにてご確認ください。
+                    </p>
+                </div>
+                <img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD" alt="" style="display:none;">
+            `;
+            document.getElementById('affiliate-area').innerHTML = adHtml;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
