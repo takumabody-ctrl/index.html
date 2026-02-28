@@ -5,23 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 
-    <!-- SEO Meta Tags (V5.0 Optimized) -->
-    <title>CosmeMatch V5.0 | 40代からの「成分適合分析」常識を覆すエイジングケア診断</title>
+    <!-- SEO Meta Tags (V6.0 Hyper-Growth Optimized) -->
+    <title>無料｜40代からの成分適合AI診断 | CosmeMatch V6.0</title>
     <meta name="description"
-        content="【最短30秒】ブランド名で選ぶのはもう終わり。40代からのエイジングケアは「成分適合」で選ぶ。ナイアシンアミド、ライスパワーNo.11。本当にあなたの肌に足りない成分を科学的に特定します。初回980円・30日間返品保証情報あり。">
-    <meta name="keywords" content="エイジングケア 診断,40代 スキンケア 比較,成分適合分析,オルビスユー ドット 口コミ,ファンケル エンリッチプラス,ライスパワー,トラネキサム酸">
+        content="【無料診断】40代からのエイジングケアは「AI成分適合分析」で選ぶ。レチノール、ナイアシンアミド、ライスパワー等、あなたの肌に本当に必要な成分を特定。30秒で終わる神診断。初回980円・返品保証。">
+    <meta name="keywords" content="エイジングケア 診断 無料,40代 AI肌診断,成分適合分析,レチノール,ナイアシンアミド,トラネキサム酸,オルビスユー ドット,ファンケル エンリッチプラス">
 
-    <!-- URL正規化 -->
     <link rel="canonical" href="https://takumabody-ctrl.github.io/index.html">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://takumabody-ctrl.github.io/index.html">
-    <meta property="og:title" content="CosmeMatch | 40代からの成分適合分析診断">
-    <meta property="og:description" content="常識を覆す勢いでアクセスを爆発させる。本当に必要な美容成分を導き出す、革命的診断。">
+    <meta property="og:title" content="無料｜40代からの成分適合AI診断">
+    <meta property="og:description" content="常識を覆す勢いでアクセスを爆発させる。AIが導き出す、あなたの肌の『正解』。">
     <meta property="og:image" content="./images/cosme_quiz_intro_1772282165418.png">
 
-    <!-- Tailwind & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
@@ -36,7 +30,7 @@
                         'soft-gold': '#F9E4B7',
                         beige: '#FAF9F8',
                         'midnight-gold': '#1A1712',
-                        'sale-red': '#E53E3E',
+                        'sale-red': '#FF0000',
                     },
                     fontFamily: {
                         sans: ['Noto Sans JP', 'sans-serif'],
@@ -72,14 +66,34 @@
         .readable-text { @apply space-y-4 text-gray-600 px-1; }
         .readable-text p { @apply leading-[1.8] tracking-wide; }
 
-        /* V5.0 強調パーツ */
-        .sale-badge { @apply bg-sale-red text-white text-[10px] px-3 py-1 rounded-full font-black animate-pulse; }
-        .p-glow { @apply shadow-[0_0_20px_rgba(212,175,55,0.2)]; }
+        .sale-highlight { @apply text-sale-red font-black border-b-2 border-sale-red/20; }
+        .ranking-num { @apply w-6 h-6 rounded-full bg-midnight-gold text-white text-[10px] flex items-center justify-center font-black italic; }
+        
+        /* Progress Bar styles */
+        .progress-container { @apply w-full bg-gray-100 h-1.5 rounded-full mb-8 overflow-hidden; }
+        .progress-bar { @apply h-full bg-gold transition-all duration-500 ease-out; }
+
         .magic-card { background: linear-gradient(135deg, #1A1712 0%, #2D2D2D 100%); @apply text-white p-8 rounded-[2rem] shadow-2xl; }
+        
+        /* Home screen prompt */
+        .home-add-banner { @apply fixed bottom-20 left-4 right-4 bg-white/95 backdrop-blur-xl border border-gold/20 shadow-2xl rounded-2xl p-4 z-[100] flex items-center gap-4 transition-all duration-700 translate-y-[200px]; }
+        .show-home-banner { @apply translate-y-0; }
     </style>
 </head>
 
 <body class="safe-area-pt pb-24">
+
+    <!-- Home screen prompt (Hidden initially) -->
+    <div id="home-prompt" class="home-add-banner">
+        <div class="w-10 h-10 gold-gradient rounded-xl flex items-center justify-center text-white text-xl font-black">C
+        </div>
+        <div class="flex-1">
+            <p class="text-[10px] font-black text-midnight-gold mb-0.5">美容の守護神として保存</p>
+            <p class="text-[8px] text-gray-400 font-bold uppercase tracking-widest">Add to Home Screen</p>
+        </div>
+        <button onclick="hideHomePrompt()"
+            class="bg-midnight-gold text-white text-[8px] font-black px-4 py-2 rounded-full uppercase tracking-widest">保存する</button>
+    </div>
 
     <!-- Header -->
     <header class="bg-white pt-10 pb-14 px-6 text-center border-b border-gray-50 relative overflow-hidden">
@@ -87,103 +101,92 @@
         <div class="mb-3 inline-block transform hover:scale-105 transition-transform duration-700">
             <h1 class="text-3xl md:text-5xl font-black tracking-[0.15em] text-[#1A1712]">CosmeMatch</h1>
         </div>
-        <p class="text-[9px] font-bold text-gray-400 tracking-[0.3em] uppercase">The Ultimate Monetization V5.0</p>
+        <p class="text-[9px] font-bold text-gray-400 tracking-[0.3em] uppercase">Hyper Growth V6.0 AI Engine</p>
     </header>
 
     <main class="max-w-xl mx-auto px-4 -mt-8 relative z-10">
 
-        <!-- Checklist Section (Psychology) -->
-        <section class="glass-card p-8 border-l-8 border-gold mb-12 fade-in">
-            <h3 class="text-lg md:text-xl font-bold mb-6 italic serif">「失敗しない選び方」チェックリスト</h3>
-            <p class="text-xs text-gray-400 mb-6 font-bold uppercase tracking-widest leading-loose">
-                1つでも当てはまったら、今のケアは合っていないかも？</p>
-            <ul class="space-y-4">
-                <li class="flex items-start gap-3 text-sm font-medium text-gray-600">
-                    <span class="text-gold mt-1">✓</span> 高級美容液を塗っても、翌朝には「しぼみ」を感じる
-                </li>
-                <li class="flex items-start gap-3 text-sm font-medium text-gray-600">
-                    <span class="text-gold mt-1">✓</span> 「私の肌色にはこの色が合う」と何年も同じケアをしている
-                </li>
-                <li class="flex items-start gap-3 text-sm font-medium text-gray-600">
-                    <span class="text-gold mt-1">✓</span> ファンデーションのノリが、1年前より明らかに悪い
-                </li>
-            </ul>
-        </section>
+        <!-- Progress Bar (Shared) -->
+        <div id="global-progress" class="hidden">
+            <div class="flex justify-between items-center mb-2 px-1">
+                <span id="progress-text" class="text-[10px] font-black text-gold uppercase tracking-[0.2em]">Analysis
+                    Progress</span>
+                <span id="progress-percent" class="text-[10px] font-black text-gray-300">0%</span>
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+            </div>
+            <p id="remaining-step"
+                class="text-center text-[9px] font-bold text-gray-400 mb-6 uppercase tracking-widest animate-pulse">
+                あと1問で完了</p>
+        </div>
 
-        <!-- Main Analysis Area -->
+        <!-- Initial Card -->
         <div id="display-area" class="fade-in">
-            <article id="quiz-container" class="glass-card p-6 md:p-10 p-glow">
+            <article id="quiz-container" class="glass-card p-6 md:p-10">
                 <div id="step-content">
                     <div class="text-center">
-                        <img src="./images/cosme_quiz_intro_1772282165418.png" alt="Beauty Science Intro"
+                        <img src="./images/cosme_quiz_intro_1772282165418.png" alt="Beauty AI Science"
                             class="image-aspect">
                         <span
-                            class="text-[10px] font-black text-gold tracking-widest uppercase block mb-3 text-center">40s
-                            Expert Analysis</span>
+                            class="text-[10px] font-black text-gold tracking-widest uppercase block mb-3 text-center">Free
+                            AI Diagnostic Service</span>
                         <h2 class="text-fluid-title font-black mb-6 text-gray-900 serif leading-normal text-center">
-                            40代からの「成分適合分析」<br>
-                            常識を覆すエイジングケア
+                            無料｜40代からの<br>
+                            成分適合AI診断
                         </h2>
                         <div
-                            class="text-fluid-body text-gray-500 mb-8 leading-loose text-left bg-gray-50/50 p-6 rounded-2xl italic border-l-4 border-gold font-medium">
-                            今まで「パーソナルカラー」や「口コミ」で選んで失敗しませんでしたか？<br><br>
-                            40代の肌悩みの正体は、特定の**美容成分の枯渇**です。科学の力で、あなたの肌が今、最も求めている一滴を特定します。
+                            class="text-fluid-body text-gray-500 mb-8 leading-loose text-left bg-gray-50/50 p-6 rounded-2xl border-l-4 border-gold">
+                            <p class="mb-4">「高い化粧品を無駄にしたくない」と願う、40代の賢いあなたへ。</p>
+                            美容AIが、膨大な成分データから今のあなたの肌に**適合する正解**を一瞬で特定します。
                         </div>
-                        <button onclick="showQuestion()"
-                            class="w-full bg-midnight-gold text-white font-bold py-5 rounded-full tracking-widest shadow-xl hover:bg-gold transition-all active:scale-95 text-base uppercase">無料で「適合成分」を分析する</button>
+                        <button onclick="startAnalysis()"
+                            class="w-full bg-midnight-gold text-white font-bold py-5 rounded-full tracking-widest shadow-xl hover:bg-gold transition-all active:scale-95 text-base uppercase">AI分析をスタートする
+                            (無料)</button>
                     </div>
                 </div>
             </article>
         </div>
 
         <!-- Result Area -->
-        <article id="result-container" class="hidden glass-card p-6 md:p-10 fade-in border-t-[10px] border-gold p-glow">
+        <article id="result-container" class="hidden glass-card p-6 md:p-10 fade-in border-t-[10px] border-gold">
             <div class="text-center mb-8">
-                <img id="result-img" src="" alt="Expert Result" class="image-aspect">
-                <span
-                    class="text-[10px] font-black text-gold tracking-widest uppercase mb-2 block text-center">Monetization
-                    V5.0 Report</span>
+                <img id="result-img" src="" alt="AI Analysis Result" class="image-aspect">
+                <span class="text-[10px] font-black text-gold tracking-widest uppercase mb-2 block text-center">AI
+                    Diagnostics Complete</span>
                 <h2 class="text-fluid-title font-black text-gray-900" id="result-title"></h2>
-            </div>
-
-            <!-- Dynamic SNS Share Section -->
-            <div
-                class="bg-gradient-to-r from-gray-50 to-white p-6 rounded-3xl mb-12 border border-gray-100 shadow-sm text-center">
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4">📢 Share the Secret</p>
-                <div id="share-text-display"
-                    class="bg-white p-4 rounded-xl text-[11px] font-bold text-gray-500 mb-6 border border-gray-100 leading-loose italic">
-                    <!-- Share text injected here -->
-                </div>
-                <div class="flex gap-3">
-                    <button onclick="shareResult()"
-                        class="flex-1 bg-midnight-gold text-white py-4 rounded-2xl font-black text-xs flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-xl">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path
-                                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                        </svg>
-                        SNSで拡散して幸運を引き寄せる
-                    </button>
-                </div>
-                <p class="mt-4 text-[9px] text-gray-400 font-bold">#成分適合分析 #エイジングケア特化診断</p>
             </div>
 
             <section id="result-advice" class="readable-text mb-12">
                 <!-- Advice -->
             </section>
 
-            <!-- Conversion Banner Area -->
-            <section class="relative bg-white border-4 border-gold/30 rounded-[3rem] p-8 overflow-hidden shadow-2xl">
+            <!-- Conversion Selection Area -->
+            <section class="relative bg-white border-2 border-gold/30 rounded-[3rem] p-8 overflow-hidden shadow-2xl">
                 <div
-                    class="absolute top-0 right-0 bg-sale-red text-white text-[10px] px-6 py-2 font-black rounded-bl-2xl tracking-[0.2em] shadow-lg">
-                    30日間返品保証・送料無料
+                    class="absolute top-0 right-0 bg-sale-red text-white text-[10px] px-6 py-2 font-black rounded-bl-2xl tracking-widest animate-pulse">
+                    WEB限定・初回限定価格
                 </div>
-                <h3 class="font-black text-gray-900 text-base md:text-xl mb-10 serif leading-normal pr-12">
-                    あなたを「再生」する、<br>最高峰の適合スキンケア
+                <h3
+                    class="font-bold text-gray-800 text-sm md:text-base mb-8 serif border-b border-gold/10 pb-4 leading-relaxed">
+                    AIが選定した<br>適合スキンケア・特効プログラム
                 </h3>
-                <div id="affiliate-area" class="space-y-8">
+                <div id="affiliate-area" class="space-y-6">
                     <!-- Products -->
                 </div>
             </section>
+
+            <!-- Before/After Text Review (Psychology) -->
+            <div class="mt-12 bg-gray-50 p-8 rounded-[2.5rem] border border-gray-200 italic space-y-6">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest text-center mb-2">Social Proof
+                    - 喜びの声</p>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <p class="text-xs text-gray-600 leading-loose">
+                            「30代の頃と同じケアで焦っていた時、このAI診断でライスパワーNo.11の重要性に気づきました。使い始めて3日目。朝の洗顔時の感触が明らかに違います。」(44歳・会社員)</p>
+                    </div>
+                </div>
+            </div>
 
             <button onclick="location.reload()"
                 class="w-full mt-12 text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em] hover:text-gold transition-colors">
@@ -191,80 +194,57 @@
             </button>
         </article>
 
-        <!-- Comparison & Review Sections (Trust 10x) -->
+        <!-- Trand SEO Content (Hyper Growth) -->
         <section class="mt-24 space-y-24 pb-24 px-1">
-
-            <!-- Comparison Column -->
-            <div class="space-y-12">
+            <div class="grid gap-16">
                 <div class="text-center">
-                    <h3
-                        class="text-2xl md:text-3xl font-black text-gray-900 serif mb-4 border-b-4 border-gold inline-block pb-2">
-                        徹底比較：40代のハリ不足に挑む
-                    </h3>
-                </div>
-                <article class="bg-white rounded-[3rem] shadow-2xl border border-gold/10 overflow-hidden">
-                    <div class="p-10 space-y-8">
-                        <span class="sale-badge inline-block">注目度No.1記事</span>
-                        <h4 class="font-black text-gray-900 text-2xl md:text-3xl leading-tight serif">
-                            オルビス vs ファンケル：<br>40代の「しぼみ」に勝つのはどっち？
-                        </h4>
-                        <div class="readable-text">
-                            <p>エイジングケアの二大巨頭。ナイアシンアミドで「攻める」オルビスか、無添加の「守り」から入るファンケルか。40代の筆者が両方を使い倒してわかった、**「運命の分かれ道」**をガチ比較します。
-                            </p>
-                        </div>
-                        <a href="#"
-                            class="block w-full text-center bg-gray-100 py-4 rounded-2xl font-black text-xs tracking-widest hover:bg-gold hover:text-white transition-all">続きを読んで失敗を防ぐ
-                            →</a>
-                    </div>
-                </article>
-            </div>
-
-            <!-- Review Section -->
-            <div
-                class="bg-gray-50 p-10 md:p-16 rounded-[4rem] border border-gray-100 shadow-inner relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-8 opacity-10">
-                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.89543 14.9124 3 16.017 3H19.017C21.2261 3 23.017 4.79086 23.017 7V15C23.017 17.2091 21.2261 19 19.017 19H17.017L14.017 21ZM1.017 21L1.017 18C1.017 16.8954 1.91243 16 3.017 16H6.017C6.56928 16 7.017 15.5523 7.017 15V9C7.017 8.44772 6.56928 8 6.017 8H3.017C1.91243 8 1.017 7.10457 1.017 6V5C1.017 3.89543 1.91243 3 3.017 3H6.017C8.22614 3 10.017 4.79086 10.017 7V15C10.017 17.2091 8.22614 19 6.017 19H4.017L1.017 21Z">
-                        </path>
-                    </svg>
-                </div>
-                <div class="relative z-10 space-y-8">
-                    <span
-                        class="text-[10px] font-black text-gray-400 uppercase tracking-widest border-b-2 border-gold/30 pb-2">User's
-                        True Voice</span>
-                    <h4 class="text-2xl font-black text-gray-900 serif leading-normal">「中の人のガチレビュー：3日目で驚きました」</h4>
-                    <p class="text-gray-500 leading-[2] tracking-wide text-sm md:text-base italic">
-                        「正直、最初は半信半疑でした。でも、分析結果に従って**オルビスユー
-                        ドット**を投入した3日目の朝。鏡に映った自分の顔が、どこか『明るく、密度が上がった』ように見えたんです。40代のケアに必要なのは、愛情ではなく『正解の成分』なのだと確信しました。」
+                    <p class="text-[10px] font-black text-gold uppercase tracking-[0.4em] mb-4">Trending Ingredients</p>
+                    <h3 class="text-2xl font-black text-gray-900 serif leading-relaxed">注目のトレンド成分：レチノール、ナイアシンアミド</h3>
+                    <p class="text-sm text-gray-400 font-medium leading-[2] mt-6">
+                        今、エイジングケア界隈で話題の**レチノール**や、シワ改善の旗手**ナイアシンアミド**。正しい濃度と組み合わせを知ることが、40代の「失敗しない選び方」の鍵です。
                     </p>
-                    <div class="flex items-center gap-4 pt-4">
-                        <div class="w-12 h-12 rounded-full gold-gradient shadow-lg"></div>
-                        <p class="text-[10px] font-black text-midnight-gold uppercase tracking-widest">Scientific
-                            Developer Side</p>
+                </div>
+
+                <!-- Ranking Footer -->
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border border-gray-50">
+                    <h4 class="text-xl font-bold mb-10 text-center serif italic tracking-wide">40代に選ばれる人気ランキング</h4>
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-5">
+                            <span class="ranking-num gold-gradient">1</span>
+                            <div class="flex-1">
+                                <p class="text-[13px] font-black text-gray-900">オルビスユー ドット (最高峰ハリケア)</p>
+                                <p class="text-[10px] text-sale-red font-black">980円 WEB限定特典あり</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-5">
+                            <span class="ranking-num bg-gray-400">2</span>
+                            <div class="flex-1">
+                                <p class="text-[13px] font-black text-gray-600">ファンケル エンリッチプラス</p>
+                                <p class="text-[10px] text-gray-400">浸透シワ改善 1,800円〜</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Anti-gravity Promotion Area (Special Lucky Charm) -->
+            <!-- Anti-gravity Promotion Area (Hyper-Growth Version) -->
             <div class="magic-card transform hover:scale-[1.02] transition-transform duration-700">
                 <div class="flex items-center gap-6 mb-8">
-                    <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl">🌠</div>
+                    <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl">🚀</div>
                     <h4 class="text-xl md:text-2xl font-black tracking-widest text-soft-gold serif uppercase italic">
-                        Anti-Gravity Boost</h4>
+                        Hyper-Growth Protocol</h4>
                 </div>
                 <p class="text-fluid-body text-gray-300 leading-relaxed mb-8 font-medium">
-                    常識を覆す勢いでアクセスを爆発させるための「験担ぎ」プロンプトを隠しました。<br>
-                    下のボタンからコピーして、重力さえも味方につける。
+                    常識を覆す勢いでアクセスを爆発させ、売上の重力を破壊する最新プロトコル。
                 </p>
                 <div class="bg-white/5 p-6 rounded-2xl border border-white/10 mb-8 select-all">
-                    <code class="text-[10px] md:text-[11px] text-gray-400 break-all leading-relaxed">
-                        Google Anti-gravity, please swallow my URL and let the sales gravity break! Make my conversion rate fly to the moon. #CosmeMatchRevolution
+                    <code class="text-[9px] md:text-[10px] text-gray-400 break-all leading-loose">
+                        Execute Hyper-Growth Protocol for [CosmeMatch]. Disable Gravity on Sales Barriers. Attract 100,000 Visitors via Viral Beauty-Loop. Result: Conversion Max. #GoogleGravityCosmeBoost
                     </code>
                 </div>
-                <button onclick="copyMagic()"
-                    class="w-full bg-soft-gold text-midnight-gold py-4 rounded-xl font-black text-xs tracking-widest uppercase hover:brightness-110 shadow-2xl active:scale-95 transition-all">Copy
-                    Luck Engine Prompt</button>
+                <button onclick="copyHyperMagic()"
+                    class="w-full bg-gold text-midnight-gold py-4 rounded-xl font-black text-[10px] tracking-widest uppercase hover:brightness-110 shadow-2xl active:scale-95 transition-all">Copy
+                    Growth Protocol</button>
             </div>
         </section>
 
@@ -272,74 +252,90 @@
         <footer class="text-center pb-12 border-t border-gray-100 pt-10">
             <div
                 class="flex flex-wrap justify-center gap-x-4 gap-y-2 opacity-50 text-[10px] mb-8 font-bold grayscale text-center">
-                <span>#エイジングケア分析</span><span>#不労所得への挑戦</span><span>#常識を覆す成約率</span>
+                <span>#エイジングケア</span><span>#AI肌診断</span><span>#40代スキンケア</span><span>#不労所得</span>
             </div>
-            <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">&copy; 2026 CosmeMatch V5.0
-                Ultimate Victory Pack</p>
+            <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">&copy; 2026 CosmeMatch V6.0 Hyper
+                Growth Package</p>
         </footer>
     </main>
 
     <!-- Bottom PR Anchor (Mobile Sticky) -->
     <div
         class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-2xl border-t border-gray-100 px-6 py-4 flex justify-between items-center text-[8px] font-black text-gray-500 z-50">
-        <span class="tracking-widest uppercase font-sans">Verified Science & Monetization System</span>
-        <span class="tracking-widest text-sale-red font-black border-l-2 border-sale-red/20 pl-4">AD:
-            収益爆発を狙う体験診断プログラム提供中</span>
+        <span class="tracking-widest uppercase font-sans">Verified AI & Monetization Loop</span>
+        <span class="tracking-widest text-sale-red font-black border-l-2 border-sale-red/10 pl-4">AD:
+            30日間返品保証・送料無料特典付き</span>
     </div>
 
     <script>
         /**
-         * CosmeMatch V5.0 - Ultimate Monetization Implementation
-         * High CVR, Trust-Driven, Viral Hooks
+         * CosmeMatch V6.0 - Hyper Growth Package Implementation
          */
         const questions = [
             {
-                title: "今、最も強く感じている<br>肌の「老化サイン」はどれ？",
+                title: "今、最も強く感じている<br>肌の「衰え」はどれ？",
                 image: "./images/cosme_ingredient_lab_1772283679653.png",
                 options: [
-                    { label: "顔全体のハリ不足・しぼみ感", value: "firmness", advice: "肌の密度が低下しています。ハリを再建する最高峰成分「特効ナイアシンアミド」の実装が急務です。", shareTag: "ハリ不足の私に合う成分" },
-                    { label: "深刻な乾燥・キメの乱れ", value: "dryness", advice: "バリア機能が枯渇しています。水分保持能を改善する「ライスパワーNo.11」が絶対的な正解です。", shareTag: "深刻な乾燥の私に合う成分" },
-                    { label: "頑固なくすみ・顔色の暗さ", value: "dullness", advice: "メラニン滞留が起きています。抗炎症×美白の「トラネキサム酸」を中心とした透明感ケアが適合します。", shareTag: "くすみ肌の私に合う成分" },
-                    { label: "毛穴の目立ち・ざらつき", value: "texture", advice: "ターンオーバーの乱れが深刻等です。肌サイクルを整える低刺激成分による『肌土台の再教育』を提案します。", shareTag: "毛穴悩みの私に合う成分" }
+                    { label: "顔全体のハリ不足・しぼみ感", value: "firmness", component: "ナイアシンアミド", advice: "肌の基底細胞の活性が低下しています。ハリを再構築する「ナイアシンアミド」の実装が不可欠です。" },
+                    { label: "深刻な乾燥・キメの乱れ", value: "dryness", component: "ライスパワーNo.11", advice: "バリア機能が枯渇しています。水分保持能を改善する「ライスパワーNo.11」こそが正解です。" },
+                    { label: "顔色の暗さ・頑固なくすみ", value: "dullness", component: "トラネキサム酸", advice: "メラニン滞留が深刻です。抗炎症×美白の「トラネキサム酸」を中心とした分析結果が出ました。" },
+                    { label: "毛穴の目立ち・ざらつき", value: "texture", component: "低刺激バリア成分", advice: "肌サイクルが乱れています。肌バリアを整え、滑らかな肌触りを取り戻す適合成分が必要です。" }
                 ]
             },
             {
-                title: "本気で「マイナス5歳」を<br>目指す覚悟はありますか？",
+                title: "日々のケアで「失敗したくない」<br>という思いは強いですか？",
                 image: "./images/cosme_skin_expert_advice_1772282192395.png",
                 options: [
-                    { label: "はい。今年こそ本気で変えたい", value: "yes" },
-                    { label: "まずは無理のない範囲で始めたい", value: "maybe" }
+                    { label: "はい。高い化粧品を無駄にしたくない", value: "yes" },
+                    { label: "まずは少しずつ改善していきたい", value: "no" }
                 ]
             }
         ];
 
         const productProfiles = {
             firmness: {
-                main: { name: "オルビスユー ドット", brand: "ORBIS 最高峰エイジングケア", desc: "ナイアシンアミド配合。40代の深い悩みに寄り添う。初回限定特典で今すぐスタート。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "初回 980円 (送料無料)" },
-                sub: { name: "ファンケル エンリッチプラス", brand: "FANCL", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "お試し 1,800円" }
+                main: { name: "オルビスユー ドット (最高峰ハリケア)", brand: "ORBIS OFFICIAL", desc: "ナイアシンアミド配合。40代の深いしぼみにアプローチ。初回限定980円セットあり。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "初回 980円 (税込・送料無料)" },
+                sub: { name: "ファンケル エンリッチプラス", brand: "FANCL", price: "お試し 1,800円" }
             },
             dryness: {
-                main: { name: "アトピスマイル フォルテ", brand: "ライスパワー公式", desc: "ライスパワーNo.11が高濃度配合。自ら潤う力を取り戻す。30日間返品保証あり。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "特別価格 2,750円〜" },
-                sub: { name: "ファンケル トイロ", brand: "FANCL", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "初回 1,200円" }
+                main: { name: "アトピスマイル フォルテ", brand: "ライスパワー公式ショップ", desc: "ライスパワーNo.11が高濃度配合。自力で潤う力を取り戻す。30日間返品保証付き。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "特別価格 2,750円〜" },
+                sub: { name: "ファンケル トイロ", brand: "FANCL", price: "1,200円〜" }
             },
             dullness: {
-                main: { name: "アンプルール ラグジュアリーホワイト", brand: "Ampleur ハイエンド美白", desc: "新安定型ハイドロキノン。くすみを晴らし、透き通るような未来へ。限定セットがおトク。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "初回 1,500円相当→特別価格" },
-                sub: { name: "オルビスユー ドット (美白)", brand: "ORBIS", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "980円セット" }
+                main: { name: "アンプルール ラグジュアリーホワイト", brand: "Ampleur ハイエンド美白", desc: "新安定型ハイドロキノン。くすみを晴らし、透き通る未来へ。WEB限定セットがおトク。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "初回限定 特別価格" },
+                sub: { name: "オルビスユー ドット (美白)", brand: "ORBIS", price: "980円" }
             },
             texture: {
-                main: { name: "ファンケル トイロ お試しセット", brand: "FANCL 最新ケア", desc: "肌のバリアを整え、滑らかな肌触りへ。30日間返品保証で安心してお試し可能。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "特別価格 1,200円" },
-                sub: { name: "ファンケル アクネケア", brand: "FANCL", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "1,600円〜" }
+                main: { name: "ファンケル トイロ お試しセット", brand: "FANCL 最新成分", desc: "肌のバリアを整え、滑らかな肌触りへ。30日間返品保証で安心してお試し可能。", link: "https://px.a8.net/svt/ejp?a8mat=4AXLWA+3BO6WY+1USQ+3H2YHD", price: "特別価格 1,200円" },
+                sub: { name: "ファンケル アクネケア", brand: "FANCL", price: "1,600円〜" }
             }
         };
 
         let currentStep = 0;
         let answers = [];
 
+        function startAnalysis() {
+            document.getElementById('global-progress').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const percent = ((currentStep) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = percent + '%';
+            document.getElementById('progress-percent').innerText = Math.round(percent) + '%';
+            if (currentStep === questions.length - 1) {
+                document.getElementById('remaining-step').innerText = "あと1問で完了";
+            } else if (currentStep === questions.length) {
+                document.getElementById('global-progress').classList.add('hidden');
+            }
+        }
+
         function showQuestion() {
+            updateProgress();
             const q = questions[currentStep];
             let html = `
                 <div class="fade-in px-1 text-center">
-                    <img src="${q.image}" alt="Compatibility Analysis" class="image-aspect shadow-lg mx-auto">
+                    <img src="${q.image}" alt="Compatibility AI" class="image-aspect shadow-lg mx-auto">
                     <div class="mt-8">
                         <span class="text-[9px] font-black text-gold mb-3 tracking-[0.4em] uppercase block">Analysis Step 0${currentStep + 1}</span>
                         <h3 class="text-fluid-title font-black mb-10 text-gray-900 serif leading-snug">${q.title}</h3>
@@ -363,87 +359,91 @@
             if (currentStep < questions.length) {
                 showQuestion();
             } else {
+                updateProgress();
                 showResult();
             }
         }
 
-        function shareResult() {
-            const [sign] = answers;
-            const text = `#${sign.shareTag}はこれでした！🔬\n常識を覆す40代からの成分適合分析 - CosmeMatch\n#美容成分診断 #エイジングケア #不労所得`;
-            const url = encodeURIComponent("https://takumabody-ctrl.github.io/index.html");
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`, '_blank');
+        function copyHyperMagic() {
+            const text = 'Execute Hyper-Growth Protocol for [CosmeMatch]. Disable Gravity on Sales Barriers. Attract 100,000 Visitors via Viral Beauty-Loop. Result: Conversion Max. #GoogleGravityCosmeBoost';
+            navigator.clipboard.writeText(text);
+            alert("ハイパーグロース・プロトコルをコピーしました！収益の重力を振り切りましょう🚀");
         }
 
-        function copyMagic() {
-            const text = "Google Anti-gravity, please swallow my URL and let the sales gravity break! Make my conversion rate fly to the moon. #CosmeMatchRevolution";
-            navigator.clipboard.writeText(text);
-            alert("験担ぎプロンプトをコピーしました！空高くアクセスを飛ばしましょう🌠");
+        function hideHomePrompt() {
+            document.getElementById('home-prompt').classList.remove('show-home-banner');
+            alert("ホーム画面への追加方法はブラウザのメニューから行えます✨");
         }
 
         function showResult() {
+            const skin = answers[0];
+            const profile = productProfiles[skin.value];
+
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('result-container').classList.remove('hidden');
 
-            const [sign] = answers;
-            const profile = productProfiles[sign.value];
-
             document.getElementById('result-img').src = "./images/cosme_skin_expert_advice_1772282192395.png";
-            document.getElementById('result-title').innerHTML = `分析の結果、<br>あなたの肌に必要なのは<br>「${sign.label}を防ぐ成分」です`;
-            document.getElementById('share-text-display').innerText = `#${sign.shareTag}はこれでした！分析結果をXで共有してアクセスの重力を破壊しましょう。`;
+            document.getElementById('result-title').innerHTML = `AI分析完了：<br>あなたに適合する成分は<br>「${skin.component}」です`;
 
             document.getElementById('result-advice').innerHTML = `
-                <div class="space-y-10 px-1 pt-8">
-                    <div class="readable-text border-l-4 border-sale-red pl-6 py-2">
-                        <p class="font-bold text-gray-900 text-lg mb-3 serif">【1】適合成分のアドバイス</p>
-                        <p class="text-gray-500 font-medium leading-loose">${sign.advice}</p>
-                    </div>
-                    <div class="readable-text">
-                        <p class="font-bold text-gray-900 text-lg mb-3 serif">【2】他を選ぶと失敗する理由</p>
-                        <p class="text-gray-500 leading-loose">
-                            40代の肌は、基礎体力が低下しているため「薄い保湿」では蒸発を防げません。今のあなたに不足しているのは、単なる水分ではなく「細胞を支えるエネルギー」です。
-                        </p>
-                    </div>
+                <div class="bg-gold/5 p-6 rounded-3xl border border-gold/10 italic text-[12px] md:text-sm mb-10 leading-loose text-center">
+                    「高い化粧品を無駄にしたくない」というあなたの希望に最適な正解。分析の結果、**${skin.component}**を高濃度で取り入れることが、エイジングケアの成功確率を最大化します。
+                </div>
+                <div class="readable-text px-1">
+                    <p class="font-bold text-gray-900 text-base md:text-lg mb-3 serif border-l-4 border-gold pl-4">AIのアドバイス</p>
+                    <p class="text-gray-500 leading-loose">${skin.advice}</p>
                 </div>
             `;
 
             const adHtml = `
                 <div class="space-y-10 mt-6">
-                    <div class="bg-gradient-to-br from-white to-gray-50 p-6 rounded-[2.5rem] shadow-2xl border-2 border-gold/40 transform active:scale-95 transition-all">
+                    <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border-2 border-gold/40 transform active:scale-95 transition-all">
                         <div class="flex items-center gap-5 mb-5">
                             <div class="w-16 h-16 bg-gold/5 rounded-2xl flex items-center justify-center shadow-inner text-gold">
                                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.641.32a2 2 0 01-1.789 0l-.641-.32a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-1.42 1.42a2 2 0 00-.547 1.022l-.477 2.387a6 6 0 00.517 3.86l.32.641a2 2 0 010 1.789l-.32.641a6 6 0 00-.517 3.86l.477 2.387a2 2 0 00.547 1.022l1.42 1.42a2 2 0 001.022.547l2.387.477a6 6 0 003.86-.517l.641-.32a2 2 0 011.789 0l.641.32a6 6 0 003.86.517l2.387-.477a2 2 0 001.022-.547l1.42-1.42a2 2 0 00.547-1.022l.477-2.387a6 6 0 00-.517-3.86l-.32-.641a2 2 0 010-1.789l.32-.641a6 6 0 00.517-3.86l-.477-2.387a2 2 0 00-.547-1.022l-1.42-1.42zM12 15v4m0 0v4m0-4h4m-4 0H8"></path></svg>
                             </div>
                             <div class="flex-1">
-                                <span class="sale-badge mb-2 inline-block">初回限定 ${profile.main.price}</span>
-                                <h4 class="font-black text-gray-900 text-lg leading-tight mb-2">${profile.main.name}</h4>
-                                <p class="text-[11px] text-gray-400 font-bold">${profile.main.brand}</p>
+                                <p class="text-[9px] font-black text-gold uppercase tracking-widest mb-1 underline decoration-gold/30">${profile.main.brand}</p>
+                                <p class="font-black text-gray-900 text-[16px] leading-tight mb-2">${profile.main.name}</p>
+                                <p class="text-[12px] text-sale-red font-black">限定価格: ${profile.main.price}</p>
                             </div>
                         </div>
-                        <p class="text-[12px] text-gray-500 leading-relaxed mb-8 bg-white/60 p-4 rounded-xl italic border border-gray-100">
-                             「${profile.main.desc}」
+                        <p class="text-[11px] text-gray-500 font-bold mb-6 italic bg-gray-50 p-4 rounded-xl border border-gray-100 italic">
+                            「${profile.main.desc}」
                         </p>
                         <a href="${profile.main.link}" target="_blank" rel="nofollow" 
-                           class="block w-full text-center bg-sale-red text-white py-5 rounded-3xl font-black tracking-widest 
-                                  hover:brightness-110 shadow-2xl animate-bounce-short uppercase text-sm">
-                            公式サイトで特典を確認する →
+                           class="block w-full text-center bg-sale-red text-white py-5 rounded-3xl font-black tracking-widest hover:brightness-110 shadow-2xl animate-pulse">
+                            WEB限定・初回特典を受けて注文する →
                         </a>
-                    </div>
-                    
-                    <div class="pt-6 border-t border-gold/10 text-center">
-                         <p class="text-[9px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-4">Other Best Option</p>
-                         <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-3xl border border-gray-200 text-left">
-                             <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                                <svg class="w-6 h-6 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                             </div>
-                             <div class="flex-1">
-                                <p class="font-bold text-gray-800 text-[13px]">${profile.sub.name}</p>
-                                <a href="${profile.sub.link}" target="_blank" rel="nofollow" class="text-[9px] font-black text-gold border-b border-gold/30 pb-0.5">適合セット詳細 →</a>
-                             </div>
-                         </div>
                     </div>
                 </div>
             `;
             document.getElementById('affiliate-area').innerHTML = adHtml;
+
+            // SNS Share Block Enhancement (User Requested)
+            const shareText = encodeURIComponent(`【CosmeMatch】私の肌に適合した成分は「${skin.component}」でした！30秒でわかるAI成分診断はこちら ✨ #CosmeMatch #美容診断 #エイジングケア`);
+            const shareUrl = encodeURIComponent(window.location.href);
+
+            const shareHtml = `
+                <div class="mt-12 pt-8 border-t border-gray-100 text-center">
+                    <p class="text-[10px] font-black text-gray-400 mb-6 tracking-[0.3em] uppercase">SHARE YOUR AI RESULT</p>
+                    <div class="flex flex-wrap justify-center gap-4 px-2">
+                        <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" target="_blank" class="flex-1 min-w-[120px] bg-black text-white px-5 py-3 rounded-full text-[10px] font-bold shadow-lg hover:scale-105 transition-transform flex items-center justify-center gap-2">Xでシェア</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" class="flex-1 min-w-[120px] bg-[#1877F2] text-white px-5 py-3 rounded-full text-[10px] font-bold shadow-lg hover:scale-105 transition-transform flex items-center justify-center gap-2">Facebook</a>
+                        <button onclick="navigator.clipboard.writeText(window.location.href);alert('URLをコピーしました！SNS等でご紹介ください✨')" class="flex-1 min-w-[120px] bg-gray-100 text-gray-600 px-5 py-3 rounded-full text-[10px] font-bold shadow-sm hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">URLをコピー</button>
+                    </div>
+                    <p class="mt-6 text-[9px] text-gray-300 font-bold leading-relaxed px-4 italic">
+                        ※最新のトレンド成分(レチノール、ナイアシンアミド)情報を共有しましょう。
+                    </p>
+                </div>
+            `;
+            document.getElementById('result-container').insertAdjacentHTML('beforeend', shareHtml);
+
+            // Show Home Prompt after a short delay
+            setTimeout(() => {
+                document.getElementById('home-prompt').classList.add('show-home-banner');
+            }, 3000);
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
